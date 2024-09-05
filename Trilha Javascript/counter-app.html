@@ -1,0 +1,109 @@
+<!--
+    DESAFIO: Adicione um botão ao contador abaixo e atribua uma funcionalidade a ele.
+    Sempre que o botão for clicado, o número do contador deve ser incrementado em 1. 
+
+    REQUISITOS: 
+    - Sempre que o número do contador for par, deixe o fundo do número do contador
+      em uma cor azul ou fria;
+    - Sempre que o número do contador for impar, deixe o fundo do número do contador
+      em uma cor vermelha ou quente;
+    - Sempre que o contador trocar de número, administre os atributo [data-even] (par)
+      e [data-odd] (impar). Quando par, [data-even] aparece e o [data-odd] desaparece,
+      e quando for impar, [data-odd] aparece e [data-even] desaparece.
+    - Precisa usar CSS
+  -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: black;
+
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .counter__text {
+        font-size: 200px;
+        color: white;
+        background-color: black;
+        padding: 50px;
+        border-radius: 50px;
+      }
+
+      .counter__text[data-odd] {
+        background-color: red;
+      }
+
+      .counter__text[data-even] {
+        background-color: blue;
+      }
+
+      #counter {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .btn-add-one {
+        padding: 10px;
+        font-size: 50px;
+        border: none;
+        background: black;
+        border-radius: 10%;
+        color: white;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .btn-add-one:hover {
+        background: linear-gradient(90deg, rgba(179,0,0,1) 0%, rgba(169,19,195,1) 50%, rgba(0,1,255,1) 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="counter" class="counter">
+      <button class="btn-add-one" type="button">+</button>
+      <span class="counter__text" data-counter-number>0</span>
+    </div>
+
+    <script>
+      const sumOne = document.querySelector(".btn-add-one");
+      const counter = document.querySelector("[data-counter-number]");
+
+      sumOne.addEventListener("click", () => {
+        const smallSum = parseInt(counter.innerText) + 1;
+        counter.innerText = smallSum;
+
+        if (smallSum % 2 === 0) {
+          counter.setAttribute("data-even", "");
+
+          if (counter.hasAttribute("data-odd")) {
+            counter.removeAttribute("data-odd");
+          }
+        } else {
+          counter.removeAttribute("data-even");
+          counter.setAttribute("data-odd", "");
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cores Aleatórias</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /*
+      * Pegamos o tamanho inteiro da tela, 
+      * porque por padrão os elementos não são maiores que o seu conteúdo 
+      * e também os elementos não possuem a altura máxima disponível.
+      *
+      * Nota: O height de 100% não funciona igual o width de 100%.
+      * 
+      * Obs.: O comentário também se aplica ao seletor `colors-columns div`
+      */
+
+      html,
+      body {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+      }
+      
+      .colors-columns div {
+        width: 100%;        
+      }
+
+      .colors-columns {
+        display: flex;
+        width: 100%;
+        min-height: 100vh;
+        background-color: antiquewhite;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="colors-columns"></div>
+
+    <script>
+      window.addEventListener("click", () => {
+        addOneColor()
+      });
+
+      /*
+      * Aqui é criada uma função de retorno da criação de um RGB dinâmico;
+      * Esse RGB utiliza o método pronto do Javascript `Math` com a sua primeira função `floor` arredondando o resultado da operação artimética para baixo;
+      * Dentro da função `floor` é gerado através do mesmo método `Math` um número aleatório que vai de 0 à 1 e multiplicamos o valor gerado por 255, que é a quantidade possível de possibilidades de RGB; 
+      */
+      function randomColor() {
+        return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(
+          Math.random() * 255
+        )}, ${Math.floor(Math.random() * 255)})`;
+      }
+
+        /*
+        * A primeira variável cria uma instância de um elemento HTML;
+        * A segunda variável ela recebe uma instância de elemento HTML `.colors-columns`;
+        * Através da div criada, é selecionado o estilo (style) e o elemento (background) que irá receber a função `randomColor`;
+        * E, por fim, adicinamos dentro do elemento `.colors-columns` a `div` criada.
+        */
+      function addOneColor() {
+        let addScreen = document.createElement("div")
+        let addColor = document.querySelector(".colors-columns")
+        addScreen.style.background = randomColor();
+        addColor.append(addScreen);
+      }      
+    </script>
+  </body>
+</html>
